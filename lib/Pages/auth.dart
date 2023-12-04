@@ -68,6 +68,14 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             obscureText: passwordVisible,
                           ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("SIgn Up"),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text("Create a Account"),
+                          ),
                         ],
                       ),
                     ),
