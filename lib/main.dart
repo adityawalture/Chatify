@@ -1,5 +1,6 @@
 import 'package:chatify/Pages/authPage.dart';
 import 'package:chatify/Pages/chatScreen.dart';
+import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingScreen();
+          }
           if (snapshot.hasData) {
             return const ChatScreen();
           }
