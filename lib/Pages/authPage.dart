@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, use_build_context_synchronously
+// ignore_for_file: prefer_final_fields, use_build_context_synchronously, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,25 +35,30 @@ class _AuthScreenState extends State<AuthScreen> {
       return;
     }
     _form.currentState!.save();
-    if (_isLogin) {
-      //login users
-    } else {
-      try {
+
+    try {
+      if (_isLogin) {
+        //login users
+        final loginCredentials = await _firebase.signInWithEmailAndPassword(
+          email: _enteredEmail,
+          password: _enteredPassword,
+        );
+      } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
-      } on FirebaseAuthException catch (error) {
-        if (error.code == 'user-already-in-use') {
-          //..
-        }
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error.message ?? "Authentication failed."),
-          ),
-        );
       }
+    } on FirebaseAuthException catch (error) {
+      if (error.code == 'user-already-in-use') {
+        //..
+      }
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.message ?? "Authentication failed."),
+        ),
+      );
     }
   }
 
