@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_final_fields, use_build_context_synchronously, unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
