@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/widgets/user_image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredPassword = "";
   File? _selectedImage;
   var _isAuthenticating = false;
+  var _enteredUsername = "";
 
   final _form = GlobalKey<FormState>();
 
@@ -68,6 +70,15 @@ class _AuthScreenState extends State<AuthScreen> {
 
         await storageImg.putFile(_selectedImage!);
         final imgUrl = await storageImg.getDownloadURL();
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredentials.user!.uid)
+            .set({
+          'username': _enteredUsername,
+          'email': _enteredEmail,
+          'image_ur': imgUrl,
+        });
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'user-already-in-use') {
@@ -118,6 +129,23 @@ class _AuthScreenState extends State<AuthScreen> {
                                 _selectedImage = pickedImage;
                               },
                             ),
+                          if (!_isLogin)
+                            TextFormField(
+                              decoration:
+                                  const InputDecoration(labelText: "User Name"),
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value.trim().length < 4) {
+                                  return "Enter atleat four characters";
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _enteredUsername = value!;
+                              },
+                            ),
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: "Email",
@@ -164,7 +192,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                           const SizedBox(height: 16),
-                          if (_isAuthenticating) const CircularProgressIndicator(),
+                          if (_isAuthenticating)
+                            const CircularProgressIndicator(),
                           if (!_isAuthenticating)
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
