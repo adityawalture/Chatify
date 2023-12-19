@@ -15,6 +15,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: Lottie.asset(
           "assets/animation/loading_animation.json",
+          
         ),
       ),
     );

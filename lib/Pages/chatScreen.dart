@@ -1,3 +1,5 @@
+import 'package:chatify/widgets/chat_messages.dart';
+import 'package:chatify/widgets/new_messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +23,13 @@ class ChatScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text("Home Page"),
+      body: const Column(
+        children: [
+          Expanded(
+            child: ChatMessages(),
+          ),
+          NewMessages(),
+        ],
       ),
     );
   }

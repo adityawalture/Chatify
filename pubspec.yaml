@@ -40,7 +40,7 @@ dependencies:
   firebase_storage: ^11.5.5
   image_picker: ^1.0.4
   cloud_firestore: ^4.13.6
-
+  lottie: ^2.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,7 +51,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
-  lottie:
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
