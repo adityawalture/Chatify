@@ -1,16 +1,38 @@
-# chatify
+# chatify 💬
 
-A new Flutter project.
+<img src="./assets/Chatify_logo.png" alt="Logo" style="width: 200px; height: auto; border-radius: 10px;">
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+<div style="display: flex; justify-content: space-between;">
+    <img src="./assets/Screenshot_20231231_190705.png" alt="Screenshot 1" style="width: 200px; height: auto; border-radius: 10px;">
+    <img src="./assets/Screenshot_20231231_190717.png" alt="Screenshot 2" style="width: 200px; height: auto; border-radius: 10px;">
+    <img src="./assets/Screenshot_20231231_191626.png" alt="Screenshot 3" style="width: 200px; height: auto; border-radius: 10px;">
+</div>
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Requirements for the app to run and other tools to build, test and push 
+- Install Flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Installing
+
+Clone this repository 
+
+    git clone https://github.com/adityawalture/Chatify.git
+
+Dependecies Used
+
+    firebase_core: ^2.24.1
+    firebase_auth: ^4.15.1
+    firebase_storage: ^11.5.5
+    image_picker: ^1.0.4
+    cloud_firestore: ^4.13.6
+    firebase_messaging: ^14.7.9
+
+## APK
+<a href="https://drive.google.com/file/d/1XqGO74uwajbFQymqgfXHAaW7C2Xi1tEa/view?usp=sharing">Download APK</a>
+
+## Contributing
+Contributions are welcome! If you find a bug or have an idea for an enhancement, please open an issue or submit a pull request.
