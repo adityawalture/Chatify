@@ -5,10 +5,10 @@
 
 ## Getting Started
 
-<div style="display: flex; justify-content: space-between;">
-    <img src="./assets/Screenshot_20231231_190705.png" alt="Screenshot 1" style="width: 200px; height: auto; border-radius: 10px;">
-    <img src="./assets/Screenshot_20231231_190717.png" alt="Screenshot 2" style="width: 200px; height: auto; border-radius: 10px;">
-    <img src="./assets/Screenshot_20231231_191626.png" alt="Screenshot 3" style="width: 200px; height: auto; border-radius: 10px;">
+<div style="display: flex; justify-content: space-evenly;">
+    <img src="./assets/Screenshot_20231231_190705.png" alt="Screenshot 1" style="width: 200px; height: auto; border-radius: 15px; padding-right: 10px;">
+    <img src="./assets/Screenshot_20231231_190717.png" alt="Screenshot 2" style="width: 200px; height: auto; border-radius: 15px; padding-right: 10px;">
+    <img src="./assets/Screenshot_20231231_191626.png" alt="Screenshot 3" style="width: 200px; height: auto; border-radius: 15px;">
 </div>
 
 ### Prerequisites
