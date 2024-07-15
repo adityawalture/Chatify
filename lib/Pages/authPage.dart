@@ -2,7 +2,7 @@
 
 import 'dart:io';
 
-import 'package:chatify/Pages/loadingScreen.dart';
+// import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/widgets/user_image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
@@ -100,7 +100,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
