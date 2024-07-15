@@ -1,9 +1,12 @@
 import 'package:chatify/Pages/authPage.dart';
+import 'package:chatify/Pages/authentication_pg.dart';
 import 'package:chatify/Pages/chatScreen.dart';
 import 'package:chatify/Pages/loadingScreen.dart';
+import 'package:chatify/bloc/internetbloc/internet_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,27 +23,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ChatiFy',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 63, 17, 177),
+    return BlocProvider(
+      create: (context) => InternetBloc(),
+      child: MaterialApp(
+        title: 'ChatiFy',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 63, 17, 177),
+          ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
-      ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingScreen();
-          }
-          if (snapshot.hasData) {
-            return const ChatScreen();
-          } else {
-            return const AuthScreen();
-          }
-        },
+        home: const AuthenticationPg(),
       ),
     );
   }
