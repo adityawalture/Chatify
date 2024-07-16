@@ -3,6 +3,8 @@ import 'package:chatify/bloc/loginbloc/auth_state.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+// Bloc class to handle authentication events and states
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(InitialAuthState()) {
 //

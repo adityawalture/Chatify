@@ -46,6 +46,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   email_validator: ^3.0.0
   connectivity: ^3.0.6
+  google_fonts: ^6.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,6 +94,7 @@ flutter:
   assets:
     - assets/animation/animation_1.json
     - assets/animation/loading_animation.json
+    - assets/logos/google.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

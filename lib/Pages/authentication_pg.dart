@@ -4,6 +4,7 @@ import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/Pages/loginpg.dart';
 import 'package:chatify/bloc/internetbloc/internet_bloc.dart';
 import 'package:chatify/bloc/internetbloc/internetstate.dart';
+import 'package:chatify/bloc/loginbloc/auth_bloc.dart';
 import 'package:chatify/widgets/customsnackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,10 @@ class AuthenticationPg extends StatelessWidget {
           if (snapshot.hasData) {
             return const ChatScreen();
           } else {
-            return const LoginPage();
+            return BlocProvider(
+              create: (context) => AuthBloc(),
+              child: const LoginPage(),
+            );
           }
         },
       ),
