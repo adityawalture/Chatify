@@ -80,7 +80,7 @@ class _SignUpState extends State<SignUp> {
       );
       final storeProfilePic = FirebaseStorage.instance
           .ref()
-          .child('user_prifilepic')
+          .child('user_profilepic')
           .child('${userCredentials.user!.uid}.jpeg');
 
       await storeProfilePic.putFile(_selectedImage!);

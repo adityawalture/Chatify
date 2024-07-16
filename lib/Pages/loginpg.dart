@@ -60,13 +60,14 @@ class _LoginPageState extends State<LoginPage> {
 
         if (mounted) {
           // Navigator.of(context).pop();
-          _hideLoadingDialog;
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const ChatScreen(),
             ),
           );
+          _hideLoadingDialog;
         }
       } on FirebaseAuthException catch (e) {
         handleLoginError(e);
