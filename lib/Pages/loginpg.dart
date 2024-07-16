@@ -4,7 +4,7 @@ import 'package:chatify/widgets/customsnackbar.dart';
 import 'package:chatify/widgets/customtextfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,6 +26,9 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     passwordVisible = true;
+
+    _emailController.addListener(toggleButtonState);
+    _passwordController.addListener(toggleButtonState);
   }
 
   @override
@@ -44,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> userLogin() async {
     if (_emailController.text.isNotEmpty &&
-        _passwordController.text.length >= 8 &&
+        _passwordController.text.length >= 7 &&
         _passwordController.text.isNotEmpty) {
       try {
         //loading circle
@@ -122,14 +125,16 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Chatify",
+                      // "Chatify",
+                      "च्याटify",
                       style: GoogleFonts.firaSans(
-                        fontSize: 40,
+                        fontSize: screenHeight * 0.045,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    Lottie.asset("assets/animation/animation_1.json"),
+                    Lottie.asset("assets/animation/animation_1.json",
+                        width: screenWidth * 0.55),
                   ],
                 ),
               ),
@@ -205,13 +210,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: isLoginButtonEnabled ? () => userLogin : null,
+                          onTap: userLogin,
                           child: Container(
                             height: screenHeight * 0.045,
                             width: screenWidth * 0.30,
                             decoration: BoxDecoration(
                               color: isLoginButtonEnabled
-                                  ? Colors.black
+                                  ? Theme.of(context).colorScheme.inversePrimary
                                   : Colors.grey,
                               borderRadius: const BorderRadius.all(
                                 Radius.elliptical(14.0, 14.0),

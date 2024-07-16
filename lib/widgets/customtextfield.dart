@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: screenHeight * 0.070,
+      height: screenHeight * 0.060,
       width: screenWidth * 0.75,
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -62,7 +62,7 @@ class CustomTextField extends StatelessWidget {
           contentPadding: EdgeInsets.only(
             top: MediaQuery.of(context).size.width * 0.04, //15.0
             left: MediaQuery.of(context).size.width * 0.04, //12.0
-            bottom: MediaQuery.of(context).size.width * 0.04, //10.0
+            bottom: MediaQuery.of(context).size.width * 0.025, //10.0
           ),
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height * 0.075,

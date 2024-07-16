@@ -1,5 +1,6 @@
 import 'package:chatify/Pages/authPage.dart';
 import 'package:chatify/Pages/chatScreen.dart';
+import 'package:chatify/Pages/homepage.dart';
 import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/Pages/loginpg.dart';
 import 'package:chatify/bloc/internetbloc/internet_bloc.dart';
@@ -35,7 +36,7 @@ class AuthenticationPg extends StatelessWidget {
             return const LoadingScreen();
           }
           if (snapshot.hasData) {
-            return const ChatScreen();
+            return const Homepage();
           } else {
             return BlocProvider(
               create: (context) => AuthBloc(),

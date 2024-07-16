@@ -33,22 +33,27 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundColor: Colors.grey,
-          foregroundImage:
-              _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
-        ),
-        TextButton.icon(
-          onPressed: _pickImage,
-          icon: const Icon(Icons.image_outlined),
-          label: Text(
-            "Add Image",
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        GestureDetector(
+          onTap: _pickImage,
+          child: CircleAvatar(
+            radius: screenHeight * 0.03,
+            backgroundColor: Colors.grey,
+            foregroundImage:
+                _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
+            child: const Icon(Icons.camera_outlined),
           ),
         ),
+        // TextButton.icon(
+        //   onPressed: _pickImage,
+        //   icon: const Icon(Icons.image_outlined),
+        //   label: Text(
+        //     "Add Image",
+        //     style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        //   ),
+        // ),
       ],
     );
   }
