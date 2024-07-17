@@ -2,12 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Userslist extends StatelessWidget {
   const Userslist({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
@@ -52,7 +54,14 @@ class Userslist extends StatelessWidget {
                           CachedNetworkImageProvider(user['profilePic'] ?? ''),
                       child: const Icon(Icons.person),
                     ),
-                    title: Text(user['username'] ?? 'No Name'),
+                    title: Text(
+                      user['username'] ?? 'No Name',
+                      style: GoogleFonts.firaSans(
+                        fontSize: screenHeight * 0.017,
+                        fontWeight: FontWeight.w400,
+                        // color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                   ),
                 ),
               ),

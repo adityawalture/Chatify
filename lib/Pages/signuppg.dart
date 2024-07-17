@@ -7,7 +7,7 @@ import 'package:chatify/widgets/customtextfield.dart';
 import 'package:chatify/widgets/user_image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
         ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "Registered successfully").snackbar,
         );
-        Navigator.push(
+        Navigator.pop(
           context,
           MaterialPageRoute(
             builder: (context) => const Homepage(),
@@ -319,10 +319,11 @@ class _SignUpState extends State<SignUp> {
                   child: Text(
                     "Login",
                     style: TextStyle(
-                      fontSize:
-                          MediaQuery.of(context).size.width * 0.035, //16.0
-                      color: const Color.fromARGB(217, 53, 161, 248),
-                    ),
+                        fontSize:
+                            MediaQuery.of(context).size.width * 0.035, //16.0
+                        fontWeight: FontWeight.bold
+                        //color: const Color.fromARGB(217, 53, 161, 248),
+                        ),
                   ),
                 ),
               ],

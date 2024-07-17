@@ -54,8 +54,8 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         obscureText: isObsecureText!,
         obscuringCharacter: obsecureCharacter!,
-        style: const TextStyle(
-          fontSize: 16,
+        style: TextStyle(
+          fontSize: screenHeight * 0.014,
           color: Colors.black,
         ),
         decoration: InputDecoration(

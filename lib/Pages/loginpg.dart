@@ -1,4 +1,5 @@
 import 'package:chatify/Pages/chatScreen.dart';
+import 'package:chatify/Pages/homepage.dart';
 import 'package:chatify/Pages/signuppg.dart';
 import 'package:chatify/widgets/customsnackbar.dart';
 import 'package:chatify/widgets/customtextfield.dart';
@@ -61,16 +62,17 @@ class _LoginPageState extends State<LoginPage> {
         if (mounted) {
           // Navigator.of(context).pop();
 
-          Navigator.pushReplacement(
+          Navigator.pop(
             context,
             MaterialPageRoute(
-              builder: (context) => const ChatScreen(),
+              builder: (context) => const Homepage(),
             ),
           );
           _hideLoadingDialog;
         }
       } on FirebaseAuthException catch (e) {
         handleLoginError(e);
+        _hideLoadingDialog();
       }
     }
   }
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void handleLoginError(FirebaseAuthException e) {
-    _hideLoadingDialog; // Remove loading dialog
+    // Remove loading dialog
     if (e.code == 'user-not-found') {
       ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "User not found").snackbar);
@@ -103,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "Something went wrong").snackbar);
     }
+    _hideLoadingDialog;
   }
 
   @override
@@ -305,7 +308,8 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                       fontSize:
                           MediaQuery.of(context).size.width * 0.035, //16.0
-                      color: const Color.fromARGB(217, 53, 161, 248),
+                      // color: const Color.fromARGB(217, 53, 161, 248),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

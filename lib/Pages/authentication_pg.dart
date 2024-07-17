@@ -34,8 +34,7 @@ class AuthenticationPg extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingScreen();
-          }
-          if (snapshot.hasData) {
+          } else if (snapshot.hasData) {
             return const Homepage();
           } else {
             return BlocProvider(
