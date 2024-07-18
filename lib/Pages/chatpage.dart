@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chatify/widgets/messagebubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:chatify/services/chat_service.dart';
 import 'package:chatify/widgets/customtextfield.dart';
 
-class ChaatPage extends StatelessWidget {
+class ChaatPage extends StatefulWidget {
   final String receiverEmail;
   final String receiverId;
   // final String imageUrl;
   final String receiverName;
-  ChaatPage({
+  const ChaatPage({
     super.key,
     required this.receiverEmail,
     required this.receiverId,
@@ -20,14 +21,21 @@ class ChaatPage extends StatelessWidget {
     // required this.imageUrl,
   });
 
+  @override
+  State<ChaatPage> createState() => _ChaatPageState();
+}
+
+class _ChaatPageState extends State<ChaatPage> {
   final _messageController = TextEditingController();
+
   final _chatService = ChatService();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //send message
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _chatService.sendMessage(receiverId, _messageController.text);
+      await _chatService.sendMessage(widget.receiverId, _messageController.text);
       _messageController.clear();
     }
   }
@@ -37,7 +45,7 @@ class ChaatPage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       appBar: AppBar(
         foregroundColor: Theme.of(context).colorScheme.onInverseSurface,
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -46,7 +54,7 @@ class ChaatPage extends StatelessWidget {
         //   radius: MediaQuery.of(context).size.width * 0.07,
         //   child: const Icon(Icons.person),
         // ),
-        title: Text(receiverName,
+        title: Text(widget.receiverName,
             style: GoogleFonts.firaSans(
               fontSize: screenHeight * 0.03,
               fontWeight: FontWeight.w400,
@@ -66,7 +74,7 @@ class ChaatPage extends StatelessWidget {
   Widget _buildMessageList() {
     String senderId = _auth.currentUser!.uid;
     return StreamBuilder(
-        stream: _chatService.getMessages(receiverId, senderId),
+        stream: _chatService.getMessages(widget.receiverId, senderId),
         builder: (context, snapshot) {
           //error
           if (snapshot.hasError) {
@@ -99,42 +107,43 @@ class ChaatPage extends StatelessWidget {
           crossAxisAlignment:
               isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            Text(data['message']),
+            ChatBubble(
+              isCurrentUser: isCurrentUser,
+              message: data['message'],
+            )
           ],
         ));
   }
 
   Widget _userInput(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      color: Theme.of(context).colorScheme.inversePrimary,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(9.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: CustomTextField(
-                  hintText: 'Type a message',
-                  controller: _messageController,
-                ),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(9.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: CustomTextField(
+                keyboardType: TextInputType.multiline,
+                hintText: 'Type a message',
+                controller: _messageController,
               ),
-              SizedBox(width: screenWidth * 0.02),
-              Container(
-                margin: EdgeInsets.only(right: screenWidth * 0.005),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.send_rounded,
-                    color: Colors.white,
-                  ),
-                  onPressed: sendMessage,
+            ),
+            SizedBox(width: screenWidth * 0.02),
+            Container(
+              margin: EdgeInsets.only(right: screenWidth * 0.005),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  shape: BoxShape.circle),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.send_rounded,
+                  color: Colors.white,
                 ),
+                onPressed: sendMessage,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

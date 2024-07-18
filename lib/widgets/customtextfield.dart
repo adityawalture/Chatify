@@ -4,6 +4,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
+
   final bool? isObsecureText;
   final String? obsecureCharacter;
   final Widget? prefixIcon;
@@ -51,6 +52,7 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         validator: validator,
         keyboardType: keyboardType,
+        textCapitalization: TextCapitalization.sentences,
         controller: controller,
         obscureText: isObsecureText!,
         obscuringCharacter: obsecureCharacter!,
