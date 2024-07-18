@@ -1,6 +1,6 @@
 // import 'package:chatify/Pages/chatScreen.dart';
 import 'package:chatify/Pages/chatpage.dart';
-import 'package:chatify/Pages/loadingScreen.dart';
+// import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/Pages/paymentpage.dart';
 import 'package:chatify/Pages/settingspage.dart';
 import 'package:chatify/services/chat_service.dart';
@@ -128,14 +128,17 @@ class _HomepageState extends State<Homepage> {
               context,
               MaterialPageRoute(
                 builder: (context) => ChaatPage(
-                  imageUrl: userData['profilePic'] ?? '',
+                  // receiverId: userData['receiverId'] ?? '',
+                  // imageUrl: userData['profilePic'] ?? '',
                   receiverName: userData['username'],
+                  receiverEmail: userData['email'],
+                  receiverId: userData['uid'] ,
                 ),
               ));
         },
       );
     } else {
-      return Container();
+      return const SizedBox.shrink();
     }
   }
 }

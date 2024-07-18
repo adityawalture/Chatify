@@ -1,14 +1,24 @@
-import 'package:chatify/services/chat_service.dart';
-import 'package:chatify/widgets/customtextfield.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:chatify/services/chat_service.dart';
+import 'package:chatify/widgets/customtextfield.dart';
+
 class ChaatPage extends StatelessWidget {
+  final String receiverEmail;
+  final String receiverId;
+  // final String imageUrl;
   final String receiverName;
-  final String imageUrl;
-  ChaatPage({super.key, required this.receiverName, required this.imageUrl});
+  ChaatPage({
+    super.key,
+    required this.receiverEmail,
+    required this.receiverId,
+    required this.receiverName,
+    // required this.imageUrl,
+  });
 
   final _messageController = TextEditingController();
   final _chatService = ChatService();
@@ -17,10 +27,7 @@ class ChaatPage extends StatelessWidget {
   //send message
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _chatService.sendMessage(
-        _auth.currentUser!.uid,
-        _messageController.text,
-      );
+      await _chatService.sendMessage(receiverId, _messageController.text);
       _messageController.clear();
     }
   }
@@ -28,8 +35,9 @@ class ChaatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onTertiary,
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
         foregroundColor: Theme.of(context).colorScheme.onInverseSurface,
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -49,7 +57,7 @@ class ChaatPage extends StatelessWidget {
           Expanded(
             child: _buildMessageList(),
           ),
-          __userInput(),
+          _userInput(context),
         ],
       ),
     );
@@ -58,7 +66,7 @@ class ChaatPage extends StatelessWidget {
   Widget _buildMessageList() {
     String senderId = _auth.currentUser!.uid;
     return StreamBuilder(
-        stream: _chatService.getMessages(receiverName, senderId),
+        stream: _chatService.getMessages(receiverId, senderId),
         builder: (context, snapshot) {
           //error
           if (snapshot.hasError) {
@@ -66,7 +74,7 @@ class ChaatPage extends StatelessWidget {
           }
           //loading
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Text('Loading....'));
           }
 
           return ListView(
@@ -80,20 +88,55 @@ class ChaatPage extends StatelessWidget {
   Widget _buildMessageBubble(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    return Text(data['message']);
+    bool isCurrentUser = data['senderId'] == _auth.currentUser!.uid;
+
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+
+    return Container(
+        alignment: alignment,
+        child: Column(
+          crossAxisAlignment:
+              isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            Text(data['message']),
+          ],
+        ));
   }
 
-  Widget __userInput() {
-    return Row(
-      children: [
-        Expanded(
-          child: CustomTextField(
-            hintText: 'Type a message',
-            controller: _messageController,
+  Widget _userInput(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      color: Theme.of(context).colorScheme.inversePrimary,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(9.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: CustomTextField(
+                  hintText: 'Type a message',
+                  controller: _messageController,
+                ),
+              ),
+              SizedBox(width: screenWidth * 0.02),
+              Container(
+                margin: EdgeInsets.only(right: screenWidth * 0.005),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: BoxShape.circle),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.white,
+                  ),
+                  onPressed: sendMessage,
+                ),
+              ),
+            ],
           ),
         ),
-        IconButton(icon: const Icon(Icons.send_rounded), onPressed: sendMessage,),
-      ],
+      ),
     );
   }
 }

@@ -90,6 +90,7 @@ class _SignUpState extends State<SignUp> {
           .collection('users')
           .doc(userCredentials.user!.uid)
           .set({
+        'uid': userCredentials.user!.uid,
         'username': _usernameController.text.trim(),
         'email': _emailController.text.trim(),
         'profilePic': imgurl,

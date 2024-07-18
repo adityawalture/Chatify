@@ -101,9 +101,6 @@ class _LoginPageState extends State<LoginPage> {
     } else if (e.code == 'wrong-password') {
       ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "Wrong password").snackbar);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const CustomSnackBar(message: "Something went wrong").snackbar);
     }
     _hideLoadingDialog;
   }
