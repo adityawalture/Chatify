@@ -20,31 +20,39 @@ class UserTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
           height: MediaQuery.of(context).size.height * 0.08,
           decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              // width: 0.3,
+              style: BorderStyle.solid,
+              strokeAlign: BorderSide.strokeAlignCenter,
+            ),
             // color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Row(children: [
-            CircleAvatar(
-              foregroundImage: NetworkImage(imageUrl),
-              radius: MediaQuery.of(context).size.width * 0.07,
-              child: const Icon(Icons.person),
-            ),
-            SizedBox(width: screenWidth * 0.02),
-            Text(
-              name,
-              style: GoogleFonts.firaSans(
-                fontSize: screenHeight * 0.017,
-                fontWeight: FontWeight.w400,
-                // color: Theme.of(context).colorScheme.primary,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+              CircleAvatar(
+                foregroundImage: NetworkImage(imageUrl),
+                radius: MediaQuery.of(context).size.width * 0.07,
+                child: const Icon(Icons.person),
               ),
-            ),
-          ]),
+              SizedBox(width: screenWidth * 0.02),
+              Text(
+                name,
+                style: GoogleFonts.firaSans(
+                  fontSize: screenHeight * 0.017,
+                  fontWeight: FontWeight.w400,
+                  // color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ]),
+          ),
         ),
       ),
     );

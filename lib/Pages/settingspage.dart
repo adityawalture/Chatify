@@ -1,3 +1,4 @@
+import 'package:chatify/Pages/blockeduserspage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,11 +24,12 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
+              tileColor: Theme.of(context).colorScheme.primaryContainer,
               title: Text(
                 'A c c o u n t',
                 style: GoogleFonts.firaSans(
@@ -40,36 +42,59 @@ class SettingsPage extends StatelessWidget {
                 onPressed: () {},
                 icon: Icon(
                   Icons.person_2_rounded,
-                  color: Theme.of(context).colorScheme.error,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  title: Text(
-                    'L o g o u t',
-                    style: GoogleFonts.firaSans(
-                      fontSize: screenHeight * 0.02,
-                      fontWeight: FontWeight.w400,
-                      // color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                    },
-                    icon: Icon(
-                      Icons.logout_rounded,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              tileColor: Theme.of(context).colorScheme.primaryContainer,
+              title: Text(
+                'B l o c k e d U s e r s',
+                style: GoogleFonts.firaSans(
+                  fontSize: screenHeight * 0.02,
+                  fontWeight: FontWeight.w400,
+                  // color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-            ],
+              trailing: IconButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlockedUsersPage(),
+                  ),
+                ),
+                icon: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              tileColor: Theme.of(context).colorScheme.primaryContainer,
+              title: Text(
+                'L o g o u t',
+                style: GoogleFonts.firaSans(
+                  fontSize: screenHeight * 0.02,
+                  fontWeight: FontWeight.w400,
+                  // color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              trailing: IconButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                icon: Icon(
+                  Icons.logout_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
           ),
         ],
       ),

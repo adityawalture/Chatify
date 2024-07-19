@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class BuildUserList extends StatefulWidget {
   const BuildUserList({super.key});
 
@@ -47,7 +46,7 @@ class _BuildUserListState extends State<BuildUserList> {
 
   Widget _buildUserList() {
     return StreamBuilder(
-      stream: _chatService.getUserStream(),
+      stream: _chatService.getUsersStreamExceptBlocked(),
       builder: (context, snapshot) {
         // if error
         if (snapshot.hasError) {
@@ -103,8 +102,3 @@ class _BuildUserListState extends State<BuildUserList> {
     }
   }
 }
-
-
-
-
-
