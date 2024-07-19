@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chatify/widgets/message.dart';
 import 'package:chatify/widgets/messagebubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -160,16 +161,25 @@ class _ChaatPageState extends State<ChaatPage> {
     //------------------------------
     final currentUser = _auth.currentUser;
     if (currentUser == null) {
-      debugPrint('build message bubble error');
+      // debugPrint('build message bubble error');
       return const SizedBox.shrink();
     }
     //-------------------------------
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    Message message = Message(
+      senderId: data['senderId'],
+      senderEmail: data['senderEmail'] ?? '',
+      receiverId: data['receiverId'],
+      message: data['message'],
+      timestamp: data['timestamp'],
+    );
 
     bool isCurrentUser = data['senderId'] == currentUser.uid;
 
     var alignment =
         isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+
+    DateTime timestamp = message.timestamp.toDate();
 
     return Container(
         alignment: alignment,
@@ -182,6 +192,7 @@ class _ChaatPageState extends State<ChaatPage> {
               message: data['message'],
               messageId: doc.id,
               userId: data['senderId'],
+              timestamp: timestamp,
             )
           ],
         ));
