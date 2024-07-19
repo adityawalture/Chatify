@@ -27,16 +27,67 @@ class ChaatPage extends StatefulWidget {
 
 class _ChaatPageState extends State<ChaatPage> {
   final _messageController = TextEditingController();
-
   final _chatService = ChatService();
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  //for textfield focus
+  // FocusNode myFocusNode = FocusNode();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   //listner to focus node
+  //   myFocusNode.addListener(
+  //     () {
+  //       //delay so that keyboard has time to show up
+  //       if (myFocusNode.hasFocus) {
+  //         Future.delayed(
+  //           const Duration(microseconds: 500),
+  //           () => scrollDown(),
+  //         );
+  //       }
+  //     },
+  //   );
+
+  //   //listview to be built, then scroll bottom
+  //   Future.delayed(
+  //     const Duration(milliseconds: 500),
+  //     () => scrollDown(),
+  //   );
+  // }
+
+  // @override
+  // void dispose() {
+  //   myFocusNode.dispose();
+  //   _messageController.dispose();
+  //   super.dispose();
+  // }
+
+  // //scroll controller
+  // final ScrollController _scrollController = ScrollController();
+  // void scrollDown() {
+  //   _scrollController.animateTo(
+  //     _scrollController.position.maxScrollExtent,
+  //     duration: const Duration(seconds: 1),
+  //     curve: Curves.fastOutSlowIn,
+  //   );
+  // }
 
   //send message
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _chatService.sendMessage(widget.receiverId, _messageController.text);
-      _messageController.clear();
+      final currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        await _chatService.sendMessage(
+          widget.receiverId,
+          _messageController.text,
+        );
+        _messageController.clear();
+        // scrollDown();
+      } else {
+        debugPrint('Current user is null');
+      }
     }
   }
 
@@ -72,8 +123,14 @@ class _ChaatPageState extends State<ChaatPage> {
   }
 
   Widget _buildMessageList() {
-    String senderId = _auth.currentUser!.uid;
-    return StreamBuilder(
+    //---------------------
+    final currentUser = _auth.currentUser;
+    if (currentUser == null) {
+      return const Center(child: Text('User not authenticated!'));
+    }
+    //--------------------------------
+    String senderId = currentUser.uid;
+    return StreamBuilder<QuerySnapshot>(
         stream: _chatService.getMessages(widget.receiverId, senderId),
         builder: (context, snapshot) {
           //error
@@ -81,11 +138,17 @@ class _ChaatPageState extends State<ChaatPage> {
             return const Center(child: Text('Something went wrong!'));
           }
           //loading
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: Text('Loading....'));
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return const Center(child: Text('Loading....'));
+          // }
+          if (!snapshot.hasData ||
+              snapshot.data == null ||
+              snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No messages.'));
           }
 
           return ListView(
+            // controller: _scrollController,
             children: snapshot.data!.docs
                 .map((doc) => _buildMessageBubble(doc))
                 .toList(),
@@ -94,9 +157,16 @@ class _ChaatPageState extends State<ChaatPage> {
   }
 
   Widget _buildMessageBubble(DocumentSnapshot doc) {
+    //------------------------------
+    final currentUser = _auth.currentUser;
+    if (currentUser == null) {
+      debugPrint('build message bubble error');
+      return const SizedBox.shrink();
+    }
+    //-------------------------------
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    bool isCurrentUser = data['senderId'] == _auth.currentUser!.uid;
+    bool isCurrentUser = data['senderId'] == currentUser.uid;
 
     var alignment =
         isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
@@ -110,6 +180,8 @@ class _ChaatPageState extends State<ChaatPage> {
             ChatBubble(
               isCurrentUser: isCurrentUser,
               message: data['message'],
+              messageId: doc.id,
+              userId: data['senderId'],
             )
           ],
         ));
@@ -124,6 +196,7 @@ class _ChaatPageState extends State<ChaatPage> {
           children: [
             Expanded(
               child: CustomTextField(
+                // focusNode: myFocusNode,
                 keyboardType: TextInputType.multiline,
                 hintText: 'Type a message',
                 controller: _messageController,

@@ -1,4 +1,4 @@
-import 'package:chatify/Pages/chatScreen.dart';
+// import 'package:chatify/Pages/chatScreen.dart';
 import 'package:chatify/Pages/homepage.dart';
 import 'package:chatify/Pages/signuppg.dart';
 import 'package:chatify/widgets/customsnackbar.dart';
@@ -95,14 +95,17 @@ class _LoginPageState extends State<LoginPage> {
 
   void handleLoginError(FirebaseAuthException e) {
     // Remove loading dialog
+    _hideLoadingDialog;
     if (e.code == 'user-not-found') {
       ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "User not found").snackbar);
     } else if (e.code == 'wrong-password') {
       ScaffoldMessenger.of(context).showSnackBar(
           const CustomSnackBar(message: "Wrong password").snackbar);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const CustomSnackBar(message: "Something went wrong").snackbar);
     }
-    _hideLoadingDialog;
   }
 
   @override

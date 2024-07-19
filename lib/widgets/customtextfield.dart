@@ -4,7 +4,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
-
+  final FocusNode? focusNode;
   final bool? isObsecureText;
   final String? obsecureCharacter;
   final Widget? prefixIcon;
@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.keyboardType = TextInputType.text,
+    this.focusNode,
   });
 
   @override
@@ -51,6 +52,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextFormField(
         validator: validator,
+        focusNode: focusNode,
         keyboardType: keyboardType,
         textCapitalization: TextCapitalization.sentences,
         controller: controller,
