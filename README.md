@@ -1,19 +1,35 @@
-# GeoMark 📱
+# च्याटify 📱💬
 
-Flutter Attendance app for field workers, takes attendance with user's real-time location, time & takes image of the user as a proof.
+A flutter chating-app with stripe payment integration.
 
 ## Screenshots
 
 <div style="display: flex; justify-content: space-evenly;">
-    <img src="./assets/images/banner1.png" alt="Screenshot 1" >
+    <img src="./assets/ss1.png" alt="Screenshot 1" >
 </div>
 <div style="display: flex; justify-content: space-evenly;">
-    <img src="./assets/images/banner2.png" alt="Screenshot 1" >
+    <img src="./assets/ss2.png" alt="Screenshot 2" >
+</div>
+<div style="display: flex; justify-content: space-evenly;">
+    <img src="./assets/ss3.png" alt="Screenshot 3" >
 </div>
 
 
 # Description
- App designed to mark attendance for field workers using real-time geolocation and capturing their image (selfie) as proof of their location. The app uses Firebase for user login authentication, including Google login, and TomTom Maps API for tracking user locations. It records check-in and check-out times, total hours worked, user selfies, and current locations. This data is stored in Firestore Database
+A real-time chat application built using Flutter! This app not only lets you connect with friends and family but also allows seamless payments through Stripe.
+
+# Features
+Real-Time Messaging: Send messages instantly to your friends.
+User Authentication: Securely sign in using Firebase authentication or your Google account.
+Stripe Payments:ChatApp integrates with Stripe for hassle-free payments.
+
+# How to use
+    Clone this repository.
+    Set up your Firebase project and configure the necessary credentials.
+    Add your Stripe API keys.
+    Run the app on your device or emulator.
+
+Feel free to contribute, report issues, or suggest improvements. Let’s make ChatApp even better together! 🚀
 
 
 # Dependecies and Api Used
@@ -23,16 +39,10 @@ Flutter Attendance app for field workers, takes attendance with user's real-time
     firebase_storage
     cloud_firestore
     flutter_bloc
-    connectivity
     google_sign_in
     google_nav_bar
-    shared_preferences
-    camera
-    geolocator
-    geocoding
-    flutter_map
     http
-    latlong2
-    permission_handler:
+    flutter_stripe
     
-Api: <a href="https://developer.tomtom.com/">Tom-Tom maps</a> 
+    
+Apk: <a href="https://github.com/adityawalture/Chatify/tree/main/apk">  च्याटify</a> 
