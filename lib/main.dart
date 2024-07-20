@@ -8,11 +8,18 @@ import 'package:chatify/bloc/internetbloc/internet_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Stripe.publishableKey =
+      "pk_test_51PdJrNFifKhbZi2GeUIya7SfR3XA5fXUqmO5VGvl78828aIHWXcoyF9VuI2CurdMKnbIVynQHTLAZd5AcbkZ9hPq00IESOzO8H";
+
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

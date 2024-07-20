@@ -1,10 +1,24 @@
 import 'package:chatify/Pages/blockeduserspage.dart';
+import 'package:chatify/widgets/customalert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  // void _showDialog() {
+  //   showDialog(
+  //     barrierDismissible: false,
+  //     context: context,
+  //     builder: (context) => const CustomAlertBox(),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +102,7 @@ class SettingsPage extends StatelessWidget {
               trailing: IconButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
+                  // _showDialog;
                 },
                 icon: Icon(
                   Icons.logout_rounded,

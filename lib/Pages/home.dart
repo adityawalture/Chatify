@@ -13,6 +13,21 @@ class BuildUserList extends StatefulWidget {
 }
 
 class _BuildUserListState extends State<BuildUserList> {
+  void _futureFunctionality(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('This feature will be added in next version'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final screenWidth = MediaQuery.of(context).size.width;
@@ -31,7 +46,7 @@ class _BuildUserListState extends State<BuildUserList> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _futureFunctionality(context),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         child: const Icon(Icons.add),
       ),
