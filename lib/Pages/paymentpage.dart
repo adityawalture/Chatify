@@ -26,7 +26,7 @@ class _PaymentpageState extends State<Paymentpage> {
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent![
                       'client_secret'], //Gotten from payment intent
-                  style: ThemeMode.system,
+                  style: ThemeMode.dark,
                   merchantDisplayName: 'Ikay'))
           .then((value) {});
 
