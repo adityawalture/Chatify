@@ -1,17 +1,17 @@
 // import 'package:chatify/Pages/chatScreen.dart';
-import 'package:chatify/Pages/chatpage.dart';
+// import 'package:chatify/Pages/chatpage.dart';
 import 'package:chatify/Pages/home.dart';
 // import 'package:chatify/Pages/loadingScreen.dart';
 import 'package:chatify/Pages/paymentpage.dart';
 import 'package:chatify/Pages/settingspage.dart';
-import 'package:chatify/services/chat_service.dart';
+// import 'package:chatify/services/chat_service.dart';
 import 'package:chatify/widgets/customnavigationbar.dart';
 // import 'package:chatify/widgets/userslist.dart';
-import 'package:chatify/widgets/usertile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:chatify/widgets/usertile.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
