@@ -1,3 +1,4 @@
+import 'package:chatify/Pages/accounts.dart';
 import 'package:chatify/Pages/blockeduserspage.dart';
 import 'package:chatify/widgets/customalert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,11 +50,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: GoogleFonts.firaSans(
                   fontSize: screenHeight * 0.02,
                   fontWeight: FontWeight.w400,
-                  // color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfilePage(),
+                    ),
+                  );
+                },
                 icon: Icon(
                   Icons.person_2_rounded,
                   color: Theme.of(context).colorScheme.primary,
@@ -70,7 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: GoogleFonts.firaSans(
                   fontSize: screenHeight * 0.02,
                   fontWeight: FontWeight.w400,
-                  // color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               trailing: IconButton(
@@ -96,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: GoogleFonts.firaSans(
                   fontSize: screenHeight * 0.02,
                   fontWeight: FontWeight.w400,
-                  // color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               trailing: IconButton(

@@ -46,7 +46,7 @@ class UserTile extends StatelessWidget {
               Text(
                 name,
                 style: GoogleFonts.firaSans(
-                  fontSize: screenHeight * 0.017,
+                  fontSize: screenHeight * 0.018,
                   fontWeight: FontWeight.w400,
                   // color: Theme.of(context).colorScheme.primary,
                 ),
